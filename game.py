@@ -3,7 +3,8 @@ from player import Player
 from card import CardColor, CardLabel, Card
 from random_gen import RandomGen
 from constants import Constants
-
+from data_structures.array_sorted_list import ArraySortedList as list
+from data_structures.aset import ASet as set
 
 class Game:
     """
@@ -23,7 +24,13 @@ class Game:
             Best Case Complexity:
             Worst Case Complexity:
         """
-        raise NotImplementedError
+        self.players = list(Constants.MAX_PLAYERS)
+        self.draw_pile = list()
+        self.discard_pile = set()
+        self.current_player = None
+        self.current_color = None
+        self.current_label = None
+
 
     def generate_cards(self) -> ArrayR[Card]:
         """
@@ -86,7 +93,8 @@ class Game:
             Best Case Complexity:
             Worst Case Complexity:
         """
-        raise NotImplementedError
+        for player in players:
+            self.players.add(player)
 
     def crazy_play(self, card: Card) -> None:
         """

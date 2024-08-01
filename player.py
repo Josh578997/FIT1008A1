@@ -1,6 +1,6 @@
 from card import Card
 from constants import Constants
-import data_structures.array_sorted_list as array_sorted_list
+from data_structures.array_sorted_list import ArraySortedList as list
 
 class Player:
     """
@@ -18,12 +18,12 @@ class Player:
             None
 
         Complexity:
-            Best Case Complexity:
-            Worst Case Complexity:
+            Best Case Complexity: O(1)
+            Worst Case Complexity: O(n), where n = DECK_SIZE
         """
-        self.name: str = name
-        self.position: int = position
-        self.hand = array_sorted_list()
+        self.name: str = name #O(1)
+        self.position: int = position #O(1)
+        self.hand = list(Constants.DECK_SIZE)
 
     def add_card(self, card: Card) -> None:
         """
@@ -36,10 +36,10 @@ class Player:
             None
 
         Complexity:
-            Best Case Complexity:
-            Worst Case Complexity:
+            Best Case Complexity: O(1)
+            Worst Case Complexity: O(1)
         """
-        raise NotImplementedError
+        self.hand.add(card) #O(1)
 
     def play_card(self, index: int) -> Card:
         """
@@ -52,10 +52,12 @@ class Player:
             Card: The card at the given index from the player's hand
 
         Complexity:
-            Best Case Complexity:
-            Worst Case Complexity:
+            Best Case Complexity: O(1)
+            Worst Case Complexity: O(1)
         """
-        raise NotImplementedError
+        removed_card = self.hand[index] #O(1)
+        self.hand.delete_at_index(index) #O(1)
+        return removed_card
 
     def __len__(self) -> int:
         """
@@ -68,11 +70,10 @@ class Player:
             int: The number of cards in the player's hand
 
         Complexity:
-            Best Case Complexity:
-            Worst Case Complexity:
+            Best Case Complexity: O(1)
+            Worst Case Complexity: O(1)
         """
-        raise NotImplementedError
-
+        return len(self.hand) #O(1)
     def __getitem__(self, index: int) -> Card:
         """
         Method to get the card at the given index from the player's hand
@@ -84,7 +85,7 @@ class Player:
             Card: The card at the given index from the player's hand
 
         Complexity:
-            Best Case Complexity:
-            Worst Case Complexity:
+            Best Case Complexity: O(1)
+            Worst Case Complexity: O(1)
         """
-        raise NotImplementedError
+        return self.hand[index]
