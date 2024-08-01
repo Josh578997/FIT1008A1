@@ -21,7 +21,9 @@ class Player:
             Best Case Complexity:
             Worst Case Complexity:
         """
-        raise NotImplementedError
+        self.name = name
+        self.position = position
+        self.hand = ]
 
     def add_card(self, card: Card) -> None:
         """
