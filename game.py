@@ -25,8 +25,8 @@ class Game:
             Worst Case Complexity:
         """
         self.players = list(Constants.MAX_PLAYERS)
-        self.draw_pile = list()
-        self.discard_pile = set()
+        self.draw_pile = list(Constants.DECK_SIZE)
+        self.discard_pile = set(Constants.DECK_SIZE)
         self.current_player = None
         self.current_color = None
         self.current_label = None
