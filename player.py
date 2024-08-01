@@ -1,6 +1,6 @@
 from card import Card
 from constants import Constants
-
+import data_structures.array_sorted_list as array_sorted_list
 
 class Player:
     """
@@ -21,9 +21,9 @@ class Player:
             Best Case Complexity:
             Worst Case Complexity:
         """
-        self.name = name
-        self.position = position
-        self.hand = ]
+        self.name: str = name
+        self.position: int = position
+        self.hand = array_sorted_list()
 
     def add_card(self, card: Card) -> None:
         """

@@ -49,5 +49,5 @@ class Card:
             Best Case Complexity:
             Worst Case Complexity:
         """
-        self.color = CardColor
-        self.label = CardLabel
+        self.color = color
+        self.label = label
