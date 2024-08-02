@@ -99,7 +99,14 @@ class Game:
         i = 0
         for card in self.cards:
             self.player_dealt = self.playing_players[i]
+            if len(self.player_dealt.hand) == Constants.NUM_CARDS_AT_INIT:
+                break
             self.player_dealt.add_card(card)
+            if i < len(self.playing_players)-1:
+                i+=1
+            else:
+                i = 0
+
             
 
 
