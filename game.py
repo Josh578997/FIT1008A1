@@ -4,6 +4,7 @@ from card import CardColor, CardLabel, Card
 from random_gen import RandomGen
 from constants import Constants
 from data_structures.aset import ASet as set
+from data_structures.array_sorted_list import ArraySortedList
 
 class Game:
     """
@@ -23,7 +24,7 @@ class Game:
             Best Case Complexity:
             Worst Case Complexity:
         """
-        self.playing_players = set(Constants.MAX_PLAYERS)
+        self.playing_players = ArraySortedList(Constants.MAX_PLAYERS)
         self.draw_pile = set(Constants.DECK_SIZE)
         self.discard_pile = set(Constants.DECK_SIZE)
         self.current_player = None
@@ -97,7 +98,7 @@ class Game:
         self.cards = self.generate_cards()
         i = 0
         for card in self.cards:
-            self.playing_players[i].add_card(card)
+            pass
             
 
 

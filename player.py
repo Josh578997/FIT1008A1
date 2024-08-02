@@ -89,3 +89,10 @@ class Player:
             Worst Case Complexity: O(1)
         """
         return self.hand[index]
+    def __lt__(self,other):
+        return self.position < other.position
+    def __gt__(self,other):
+        return self.position > other.position
+    def __le__(self,other):
+        return self.position <= other.position
+
