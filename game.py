@@ -98,7 +98,8 @@ class Game:
         self.cards = self.generate_cards()
         i = 0
         for card in self.cards:
-            pass
+            self.player_dealt = self.playing_players[i]
+            self.player_dealt.add_card(card)
             
 
 
