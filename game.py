@@ -5,6 +5,7 @@ from random_gen import RandomGen
 from constants import Constants
 from data_structures.aset import ASet as set
 from data_structures.array_sorted_list import ArraySortedList
+from data_structures.stack_adt import ArrayStack
 
 class Game:
     """
@@ -25,7 +26,7 @@ class Game:
             Worst Case Complexity:
         """
         self.playing_players = ArraySortedList(Constants.MAX_PLAYERS)
-        self.draw_pile = set(Constants.DECK_SIZE)
+        self.draw_pile = ArrayStack(Constants.DECK_SIZE)
         self.discard_pile = set(Constants.DECK_SIZE)
         self.current_player = None
         self.current_color = None
@@ -100,8 +101,12 @@ class Game:
         for card in self.cards:
             self.player_dealt = self.playing_players[i]
             if len(self.player_dealt.hand) == Constants.NUM_CARDS_AT_INIT:
-                break
-            self.player_dealt.add_card(card)
+                self.draw_pile.push(card) #push card to the draw pile
+            elif len(self.player_dealt.hand) < Constants.NUM_CARDS_AT_INIT:
+                self.player_dealt.add_card(card)
+            else:
+                print("weird exeption please check code")
+                exit()
             if i < len(self.playing_players)-1:
                 i+=1
             else:
