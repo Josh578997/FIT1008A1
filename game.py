@@ -212,7 +212,7 @@ class Game:
             Worst Case Complexity:
         """
         if self.current_player == None:
-            return self.players[1]
+            return self.players[0]
         else:
             return self.players[self.current_player.position+1]
 
