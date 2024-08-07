@@ -49,5 +49,3 @@ class TestTask1(TestCase):
         self.assertEqual(self.player.play_card(0), card)
         self.assertEqual(len(self.player), 0)
         self.assertEqual(len(self.player.hand), 0)
-
-print("all tests passed!")

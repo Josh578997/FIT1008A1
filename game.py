@@ -25,7 +25,7 @@ class Game:
             Best Case Complexity:
             Worst Case Complexity:
         """
-        self.playing_players = ArraySortedList(Constants.MAX_PLAYERS)
+        self.players = ArraySortedList(Constants.MAX_PLAYERS)
         self.draw_pile = ArrayStack(Constants.DECK_SIZE)
         self.discard_pile = ArrayStack(Constants.DECK_SIZE)
         self.current_player = None
@@ -95,11 +95,11 @@ class Game:
             Worst Case Complexity:
         """
         for player in players:
-            self.playing_players.add(player)
+            self.players.add(player)
         self.cards = self.generate_cards()
         i = 0
         for card in self.cards:
-            self.player_dealt = self.playing_players[i]
+            self.player_dealt = self.players[i]
             if len(self.player_dealt.hand) == Constants.NUM_CARDS_AT_INIT:
                 self.draw_pile.push(card) #push card to the draw pile
             elif len(self.player_dealt.hand) < Constants.NUM_CARDS_AT_INIT:
