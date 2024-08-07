@@ -204,7 +204,7 @@ class Game:
         if (card.label == current_card.label or card.color == current_card.color or card.label in [13,14]) and playing == True:
             return card
         else:
-            Player.add_card(card)
+            player.add_card(card)
             return None
 
 
