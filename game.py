@@ -188,7 +188,14 @@ class Game:
             Best Case Complexity:
             Worst Case Complexity:
         """
-        raise NotImplementedError
+        drawn_card = self.draw_pile.pop()
+        current_card = self.discard_pile.peek()
+        if (drawn_card.label == current_card.label or drawn_card.color == current_card.color or drawn_card.label in [13,14]) and playing == True:
+            return drawn_card
+        else:
+            Player.add_card(drawn_card)
+            return None
+
 
     def next_player(self) -> Player:
         """
@@ -204,7 +211,7 @@ class Game:
             Best Case Complexity:
             Worst Case Complexity:
         """
-        raise NotImplementedError
+        return self.players[self.players.index(self.current_player)+1]
 
     def play_game(self) -> Player:
         """
