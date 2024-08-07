@@ -211,7 +211,7 @@ class Game:
             Best Case Complexity:
             Worst Case Complexity:
         """
-        return self.players[self.players.index(self.current_player)+1]
+        return self.players[self.position+1]
 
     def play_game(self) -> Player:
         """
