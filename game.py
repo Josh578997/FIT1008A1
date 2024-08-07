@@ -31,6 +31,7 @@ class Game:
         self.current_player = None
         self.current_color = None
         self.current_label = None
+        self.reversed = False
         
 
 
@@ -213,7 +214,7 @@ class Game:
             Best Case Complexity:
             Worst Case Complexity:
         """
-        
+
         if self.reversed is True:
             return self.players[self.current_player.position-1]
         elif self.current_player == None:
