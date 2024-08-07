@@ -95,6 +95,7 @@ class Game:
             Best Case Complexity:
             Worst Case Complexity:
         """
+        self.reversed = False
         for player in players:
             self.players.add(player)
         self.cards = self.generate_cards()
