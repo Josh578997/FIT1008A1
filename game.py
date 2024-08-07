@@ -31,6 +31,7 @@ class Game:
         self.current_player = None
         self.current_color = None
         self.current_label = None
+        self.reversed = False
 
 
     def generate_cards(self) -> ArrayR[Card]:
@@ -122,6 +123,7 @@ class Game:
         finalcard = self.discard_pile.peek()
         self.current_color = finalcard.color
         self.current_label = finalcard.label
+        
         
 
 
