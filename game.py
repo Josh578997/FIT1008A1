@@ -163,9 +163,9 @@ class Game:
             Best Case Complexity:
             Worst Case Complexity:
         """
-        if self.reverse == False:
+        if self.reversed == False:
             self.reversed = True
-        elif self.reverse == True:
+        elif self.reversed == True:
             self.reversed = False
 
     def play_skip(self) -> None:
