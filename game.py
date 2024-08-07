@@ -11,7 +11,11 @@ class Game:
     """
     Game class to play the game
     """
+
+    #boolean variables determine special game states
     reversed = False
+    skip = True
+
     def __init__(self) -> None:
         """
         Constructor for the Game class
@@ -178,7 +182,7 @@ class Game:
             Best Case Complexity:
             Worst Case Complexity:
         """
-        self.next_player()
+        self.skip = True
         self.next_player()
 
     def draw_card(self, player: Player, playing: bool) -> Card | None:
@@ -220,15 +224,25 @@ class Game:
             Worst Case Complexity:
         """
         if self.current_player is None:
-            if self.reversed is True:
+            if (self.skip is False) and (self.reversed is True):
                 return self.players[len(self.players)-1]
+            elif (self.skip is True) and (self.reversed is True):
+                self.skip = False
+                return self.players[len(self.players)-2]
+            elif (self.skip is True) and (self.reversed is False):
+                self.skip = False
+                return self.players[1]
             else:
                 return self.players[0]
         else:    
-            if self.reversed is True:
+            if (self.skip is False) and (self.reversed is True):
                 return self.players[self.current_player.position-1]
-
-            elif self.reversed is False:
+            elif (self.skip is True) and (self.reversed is True):
+                self.skip = False
+                return self.players[self.current_player.position-2]
+            elif (self.skip is True) and (self.reversed is False):
+                return self.players[self.current_player.position+2]        
+            elif (self.skip is False) and (self.reversed is False):
                 return self.players[self.current_player.position+1]
 
         
