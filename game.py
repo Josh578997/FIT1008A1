@@ -159,7 +159,10 @@ class Game:
             Best Case Complexity:
             Worst Case Complexity:
         """
-        self.reversed = True
+        if self.reverse == False:
+            self.reversed = True
+        elif self.reverse == True:
+            self.reversed = False
 
     def play_skip(self) -> None:
         """
@@ -175,7 +178,8 @@ class Game:
             Best Case Complexity:
             Worst Case Complexity:
         """
-        raise NotImplementedError
+        self.next_player()
+        self.next_player()
 
     def draw_card(self, player: Player, playing: bool) -> Card | None:
         """
