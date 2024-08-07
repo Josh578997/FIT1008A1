@@ -211,12 +211,15 @@ class Game:
             Best Case Complexity:
             Worst Case Complexity:
         """
-        if self.current_player == None:
-            return self.players[0]
-        elif self.reversed == True:
+        
+        if self.reversed is True:
             return self.players[self.current_player.position-1]
-        else:
+        elif self.current_player == None:
+            return self.players[0]
+        elif self.reversed is False:
             return self.players[self.current_player.position+1]
+
+        
 
     def play_game(self) -> Player:
         """
