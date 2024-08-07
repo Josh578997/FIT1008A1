@@ -11,6 +11,7 @@ class Game:
     """
     Game class to play the game
     """
+    reversed = False
     def __init__(self) -> None:
         """
         Constructor for the Game class
@@ -31,7 +32,7 @@ class Game:
         self.current_player = None
         self.current_color = None
         self.current_label = None
-        self.reversed = False
+        
         
 
 
