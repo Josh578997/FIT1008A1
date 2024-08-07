@@ -107,7 +107,7 @@ class Game:
             else:
                 print("weird exeption please check code")
                 exit()
-            if i < len(self.playing_players)-1:
+            if i < len(self.players)-1:
                 i+=1
             else:
                 i = 0
