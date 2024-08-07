@@ -183,7 +183,6 @@ class Game:
             Worst Case Complexity:
         """
         self.skip = True
-        self.next_player()
 
     def draw_card(self, player: Player, playing: bool) -> Card | None:
         """
