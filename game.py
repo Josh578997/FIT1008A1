@@ -155,7 +155,7 @@ class Game:
             Best Case Complexity:
             Worst Case Complexity:
         """
-        raise NotImplementedError
+        self.reversed = True
 
     def play_skip(self) -> None:
         """
@@ -213,6 +213,8 @@ class Game:
         """
         if self.current_player == None:
             return self.players[0]
+        elif self.reversed == True:
+            return self.players[self.current_player.position-1]
         else:
             return self.players[self.current_player.position+1]
 
