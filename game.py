@@ -31,7 +31,7 @@ class Game:
         self.current_player = None
         self.current_color = None
         self.current_label = None
-        self.reversed = False
+        
 
 
     def generate_cards(self) -> ArrayR[Card]:
