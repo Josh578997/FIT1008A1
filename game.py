@@ -27,7 +27,7 @@ class Game:
         """
         self.playing_players = ArraySortedList(Constants.MAX_PLAYERS)
         self.draw_pile = ArrayStack(Constants.DECK_SIZE)
-        self.discard_pile = set(Constants.DECK_SIZE)
+        self.discard_pile = ArrayStack(Constants.DECK_SIZE)
         self.current_player = None
         self.current_color = None
         self.current_label = None
@@ -111,8 +111,18 @@ class Game:
                 i+=1
             else:
                 i = 0
+        self.discard_pile.push(self.draw_pile.pop())
+        checkcard = self.discard_pile.peek()
+        currentcardlabel = checkcard.label
 
-            
+        while currentcardlabel not in [0,1,2,3,4,5,6,7,8,9]:
+            self.discard_pile.push(self.draw_pile.pop())
+            checkcard = self.discard_pile.peek()
+        
+        finalcard = self.discard_pile.peek()
+        self.current_color = finalcard.color
+        self.current_label = finalcard.label
+        
 
 
     def crazy_play(self, card: Card) -> None:
