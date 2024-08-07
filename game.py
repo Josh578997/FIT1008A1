@@ -216,8 +216,7 @@ class Game:
         """
         if self.current_player is None:
             if self.reversed is True:
-                print(self.players[-1])
-                return self.players[-1]
+                return self.players[len(self.players)-1]
             else:
                 return self.players[0]
         else:    
