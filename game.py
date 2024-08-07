@@ -14,7 +14,7 @@ class Game:
 
     #boolean variables determine special game states
     reversed = False
-    skip = True
+    skip = False
 
     def __init__(self) -> None:
         """
@@ -241,6 +241,7 @@ class Game:
                 self.skip = False
                 return self.players[self.current_player.position-2]
             elif (self.skip is True) and (self.reversed is False):
+                self.skip = False
                 return self.players[self.current_player.position+2]        
             elif (self.skip is False) and (self.reversed is False):
                 return self.players[self.current_player.position+1]
