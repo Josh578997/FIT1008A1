@@ -147,7 +147,11 @@ class Game:
             Best Case Complexity:
             Worst Case Complexity:
         """
-        raise NotImplementedError
+        self.current_color = CardColor(RandomGen.randint(0,3))
+        if card.label == CardLabel.DRAW_FOUR:
+            next_player = self.next_player()
+            for i in range(0,4):
+                self.draw_card(next_player)
 
     def play_reverse(self) -> None:
         """
