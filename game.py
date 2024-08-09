@@ -151,7 +151,7 @@ class Game:
         if card.label == CardLabel.DRAW_FOUR:
             next_player = self.next_player()
             for i in range(0,4):
-                self.draw_card(next_player)
+                self.draw_card(next_player,playing=True)
 
     def play_reverse(self) -> None:
         """
