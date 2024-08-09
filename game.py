@@ -150,10 +150,9 @@ class Game:
         self.current_color = CardColor(RandomGen.randint(0,3))
         if card.label == CardLabel.DRAW_FOUR:
             next_player = self.next_player()
-            self.draw_card(next_player,playing=True)
-            self.draw_card(next_player,playing=True)
-            self.draw_card(next_player,playing=True)
-            self.draw_card(next_player,playing=True)
+            for _ in range(4):
+                self.draw_card(next_player,playing=False)
+    
 
     def play_reverse(self) -> None:
         """
