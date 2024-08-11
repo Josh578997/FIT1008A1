@@ -282,11 +282,11 @@ class Game:
         while game:
             self.current_player = self.next_player() # get the next player and set as current
             if len(self.current_player.hand) == 0:
-                return self.current_player             # win condition
-            if self.draw_pile.is_empty():
+                return self.current_player            # win condition
+            
+            elif self.draw_pile.is_empty():
                 top_card = self.discard_pile.pop()
                 temp_array = ArrayR(len(self.discard_pile))
-
 
                 for i in range(len(self.discard_pile)):
                     temp_array[i] = self.discard_pile.pop()
@@ -295,7 +295,7 @@ class Game:
                 for i in range(len(temp_array)):
                     self.draw_pile.push(temp_array[i])
                 self.discard_pile.push(top_card)
-                
+           
             hand_card = self.current_player.hand[0]   # card to be played
             hand_card_color = hand_card.color
             hand_card_label = hand_card.label
