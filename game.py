@@ -280,17 +280,17 @@ class Game:
         """
         game = True
         while game:
-            self.current_player = self.next_player()
+            self.current_player = self.next_player() # get the next player and set as current
             if len(self.current_player.hand) == 0:
-                return self.current_player
-            hand_card = self.current_player.hand[0]
+                return self.current_player              # win condition
+            hand_card = self.current_player.hand[0]   # card to be played
             hand_card_color = hand_card.color
             hand_card_label = hand_card.label
             if hand_card_label == CardLabel.CRAZY:
                 played_card = self.current_player.play_card(0)
                 self.crazy_play(played_card)
-                self.discard_pile.push(played_card)
                 self.play_skip()
+                self.discard_pile.push(played_card)
             elif hand_card_label == CardLabel.DRAW_FOUR:
                 played_card = self.current_player.play_card(0)
                 self.crazy_play(played_card)
@@ -299,11 +299,11 @@ class Game:
                 played_card = self.current_player.play_card(0)
                 if played_card.label == CardLabel.DRAW_TWO:
                     next_player = self.next_player()
-                    for _ in range (2):
+                    for _ in range (2):                                  # draw 2 action
                         self.draw_card(next_player,playing = False)
                         self.play_skip()
                 self.discard_pile.push(played_card)
-
+            
 
 
 
