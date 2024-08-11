@@ -1,6 +1,6 @@
 from card import Card
 from constants import Constants
-from data_structures.array_sorted_list import ArraySortedList as list
+from data_structures.array_sorted_list import ArraySortedList as alist
 from data_structures.aset import ASet
 
 class Player:
@@ -24,7 +24,7 @@ class Player:
         """
         self.name: str = name #O(1)
         self.position: int = position #O(1)
-        self.hand = list(Constants.DECK_SIZE)
+        self.hand = alist(Constants.DECK_SIZE)
 
     def add_card(self, card: Card) -> None:
         """

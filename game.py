@@ -240,15 +240,27 @@ class Game:
                 return self.players[0]
         else:    
             if (self.skip is False) and (self.reversed is True):
-                return self.players[self.current_player.position-1]
+                if self.current_player.position - 1 < 0:
+                    return self.players[-1]
+                else:
+                    return self.players[self.current_player.position-1]
             elif (self.skip is True) and (self.reversed is True):
                 self.skip = False
-                return self.players[self.current_player.position-2]
+                if self.current_player.position - 2 < 0:
+                    return self.players[-1]
+                else:
+                    return self.players[self.current_player.position-2]
             elif (self.skip is True) and (self.reversed is False):
                 self.skip = False
-                return self.players[self.current_player.position+2]        
+                if self.current_player.position + 2 > len(self.players)-1:
+                    return self.players[0]
+                else:
+                    return self.players[self.current_player.position+2]        
             elif (self.skip is False) and (self.reversed is False):
-                return self.players[self.current_player.position+1]
+                if self.current_player.position == len(self.players)-1:
+                    return self.players[0]
+                else:
+                    return self.players[self.current_player.position+1]
 
         
 
@@ -266,7 +278,13 @@ class Game:
             Best Case Complexity:
             Worst Case Complexity:
         """
-        raise NotImplementedError
+        playing = True
+        while playing:
+            self.current_player = self.next_player()
+            hand_card = self.current_player.hand[0]
+            hand_card_color = hand_card.color
+
+
 
 
 def test_case():
