@@ -301,7 +301,10 @@ class Game:
                     hand_card = self.current_player.hand[i]   # card to be played
                     hand_card_color = hand_card.color
                     hand_card_label = hand_card.label
-            
+                else:
+                    new_card = self.draw_card(self.current_player, playing = True)    
+                    if new_card is not None:
+                        self.discard_pile.push(new_card)
             if hand_card_label == CardLabel.CRAZY:
                 played_card = self.current_player.play_card(0)
                 self.crazy_play(played_card)
@@ -319,10 +322,7 @@ class Game:
                         self.draw_card(next_player,playing = False)
                         self.play_skip()
                 self.discard_pile.push(played_card)
-            else:
-                new_card = self.draw_card(self.current_player, playing = True)    
-                if new_card is not None:
-                    self.discard_pile.push(new_card)
+
 
 
 
