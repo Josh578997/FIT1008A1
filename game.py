@@ -295,7 +295,8 @@ class Game:
                 for i in range(len(temp_array)):
                     self.draw_pile.push(temp_array[i])
                 self.discard_pile.push(top_card)
-
+                
+            hand_card_label,hand_card_color = None
             for i in range(len(self.current_player.hand)):
                 if self.current_player.hand[i].color == self.current_color or self.current_player.hand[i].label == self.current_label or self.current_player.hand[i].label == CardLabel.CRAZY or self.current_player.hand[i].label == CardLabel.DRAW_FOUR:
                     hand_card = self.current_player.hand[i]   # card to be played
