@@ -53,6 +53,7 @@ class Card:
         self.label = label
 
     def __lt__(self,other):
-        return self.label < other.label
+        return (self.color < other.color) and (self.label<other.label)
+        
     def __le__(self,other):
-        return self.label <= other.label
+        return (self.color <= other.color) and (self.label <= other.label)
