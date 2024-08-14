@@ -316,6 +316,10 @@ class Game:
                         self.draw_card(next_player,playing = False)
                         self.play_skip()
                 self.discard_pile.push(played_card)
+            else:
+                new_card = self.draw_card()    
+                if new_card is not None:
+                    self.discard_pile.push(new_card)
 
 
 
