@@ -290,7 +290,7 @@ class Game:
 
                 for i in range(len(self.discard_pile)):
                     temp_array[i] = self.discard_pile.pop()
-                temp_array = RandomGen.random_shuffle(temp_array)
+                RandomGen.random_shuffle(temp_array)
 
                 for i in range(len(temp_array)):
                     self.draw_pile.push(temp_array[i])
