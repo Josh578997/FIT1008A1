@@ -304,6 +304,7 @@ class Game:
                     hand_card_color = hand_card.color
                     hand_card_label = hand_card.label
                     played_card = self.current_player.play_card(i)
+                    break
             if hand_card_color == None and hand_card_label == None:
                 new_card = self.draw_card(self.current_player, playing = True) 
                 if new_card is not None:
