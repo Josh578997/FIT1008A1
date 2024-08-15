@@ -206,7 +206,7 @@ class Game:
         """
         card = self.draw_pile.pop()
         current_card = self.discard_pile.peek()
-        if (card.label == current_card.label or card.color == current_card.color or card.label in [13,14]) and playing == True:
+        if (card.label == current_card.label or card.color == current_card.color or card.label in [CardLabel.CRAZY,CardLabel.DRAW_FOUR]) and playing == True:
             return card
         else:
             player.add_card(card)
@@ -303,22 +303,20 @@ class Game:
                     hand_card = self.current_player.hand[i]   # card to be played
                     hand_card_color = hand_card.color
                     hand_card_label = hand_card.label
+                    played_card = self.current_player.play_card(i)
             if hand_card_color == None and hand_card_label == None:
-                new_card = self.draw_card(self.current_player, playing = True)    
+                new_card = self.draw_card(self.current_player, playing = True) 
                 if new_card is not None:
                     self.discard_pile.push(new_card)
                     continue
             if hand_card_label == CardLabel.CRAZY:
-                played_card = self.current_player.play_card(0)
                 self.crazy_play(played_card)
                 self.play_skip()
                 self.discard_pile.push(played_card)
             elif hand_card_label == CardLabel.DRAW_FOUR:
-                played_card = self.current_player.play_card(0)
                 self.crazy_play(played_card)
                 self.discard_pile.push(played_card)
             elif hand_card_color == self.current_color or hand_card_label == self.current_label:
-                played_card = self.current_player.play_card(0)
                 if played_card.label == CardLabel.DRAW_TWO:
                     next_player = self.next_player()
                     for _ in range (2):                                  # draw 2 action
