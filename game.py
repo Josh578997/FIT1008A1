@@ -151,6 +151,8 @@ class Game:
         if card.label == CardLabel.DRAW_FOUR:
             next_player = self.next_player()
             for _ in range(4):
+                if self.draw_pile.is_empty():
+                    self.replenish_draw_pile()
                 self.draw_card(next_player,playing=False)
     
 
@@ -262,7 +264,17 @@ class Game:
                 else:
                     return self.players[self.current_player.position+1]
 
-        
+    def replenish_draw_pile(self) -> None:
+        top_card = self.discard_pile.pop()
+        temp_array = ArrayR(len(self.discard_pile))
+
+        for i in range(len(self.discard_pile)):
+            temp_array[i] = self.discard_pile.pop()
+        RandomGen.random_shuffle(temp_array)
+
+        for i in range(len(temp_array)):
+            self.draw_pile.push(temp_array[i])
+        self.discard_pile.push(top_card)      
 
     def play_game(self) -> Player:
         """
@@ -285,16 +297,7 @@ class Game:
                 return self.current_player            # win condition
             
             elif self.draw_pile.is_empty():
-                top_card = self.discard_pile.pop()
-                temp_array = ArrayR(len(self.discard_pile))
-
-                for i in range(len(self.discard_pile)):
-                    temp_array[i] = self.discard_pile.pop()
-                RandomGen.random_shuffle(temp_array)
-
-                for i in range(len(temp_array)):
-                    self.draw_pile.push(temp_array[i])
-                self.discard_pile.push(top_card)
+                self.replenish_draw_pile()
 
             hand_card_label = None
             hand_card_color = None
@@ -321,6 +324,8 @@ class Game:
                 if played_card.label == CardLabel.DRAW_TWO:
                     next_player = self.next_player()
                     for _ in range (2):                                  # draw 2 action
+                        if self.draw_pile.is_empty():
+                            self.replenish_draw_pile()
                         self.draw_card(next_player,playing = False)
                         self.play_skip()
                 
