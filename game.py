@@ -265,6 +265,16 @@ class Game:
                     return self.players[self.current_player.position+1]
 
     def replenish_draw_pile(self) -> None:
+        '''Method to replenish the draw pile, called when the draw pile is empty
+        Args:
+            None
+        Returns:
+            None
+        Best Case Complexity:
+
+        Worst Case Complexity:
+        
+        '''
         top_card = self.discard_pile.pop()
         temp_array = ArrayR(len(self.discard_pile))
 
