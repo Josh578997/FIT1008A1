@@ -311,6 +311,7 @@ class Game:
 
             hand_card_label = None
             hand_card_color = None
+
             for i in range(len(self.current_player.hand)):
                 if self.current_player.hand[i].color == self.current_color or self.current_player.hand[i].label == self.current_label or self.current_player.hand[i].label == CardLabel.CRAZY or self.current_player.hand[i].label == CardLabel.DRAW_FOUR:
                     hand_card = self.current_player.hand[i]   # card to be played
@@ -322,8 +323,12 @@ class Game:
                 new_card = self.draw_card(self.current_player, playing = True) 
                 if new_card is not None:
                     self.discard_pile.push(new_card)
+                    self.current_player.play_card(new_card)
+                    self.discard_pile.push(played_card)
                     continue
-            if hand_card_label == CardLabel.CRAZY:
+                else:
+                    self.replenish_draw_pile()
+            elif hand_card_label == CardLabel.CRAZY:
                 self.crazy_play(played_card)
                 self.play_skip()
                 self.discard_pile.push(played_card)
