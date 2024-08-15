@@ -323,8 +323,7 @@ class Game:
 
                 for i in range(len(temp_array)):
                     self.draw_pile.push(temp_array[i])
-                self.discard_pile.push(top_card)
-
+    
                 self.play_skip()
                 self.discard_pile.push(played_card)
             elif hand_card_label == CardLabel.DRAW_FOUR:
@@ -344,8 +343,7 @@ class Game:
                         for i in range(len(self.discard_pile)):
                             temp_array[i] = self.discard_pile.pop()
                         RandomGen.random_shuffle(temp_array)
-
-
+                
                 self.discard_pile.push(played_card)
 
 
