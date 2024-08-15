@@ -305,9 +305,6 @@ class Game:
             self.current_player = self.next_player() # get the next player and set as current
             if len(self.current_player.hand) == 0:
                 return self.current_player            # win condition
-            
-            elif self.draw_pile.is_empty():
-                self.replenish_draw_pile()
 
             hand_card_label = None
             hand_card_color = None
@@ -320,28 +317,30 @@ class Game:
                     played_card = self.current_player.play_card(i)
                     break
             if hand_card_color == None and hand_card_label == None:
-                new_card = self.draw_card(self.current_player, playing = True) 
-                if new_card is not None:
-                    self.discard_pile.push(new_card)
-                    continue
-                else:
+                try:
+                    new_card = self.draw_card(self.current_player, playing = True) 
+                except Exception("Stack is empty"):
                     self.replenish_draw_pile()
+                    new_card = self.draw_card(self.current_player, playing = True)
+                self.discard_pile.push(new_card)
+                continue
             elif hand_card_label == CardLabel.CRAZY:
                 self.crazy_play(played_card)
                 self.play_skip()
                 self.discard_pile.push(played_card)
             elif hand_card_label == CardLabel.DRAW_FOUR:
                 self.crazy_play(played_card)
+                self.play_skip()
                 self.discard_pile.push(played_card)
-            elif hand_card_color == self.current_color or hand_card_label == self.current_label:
-                if played_card.label == CardLabel.DRAW_TWO:
-                    next_player = self.next_player()
-                    for _ in range (2):                                  # draw 2 action
-                        if self.draw_pile.is_empty():
-                            self.replenish_draw_pile()
-                        self.draw_card(next_player,playing = False)
-                        self.play_skip()
-                
+            elif played_card.label == CardLabel.DRAW_TWO:
+                next_player = self.next_player()
+                for _ in range (2):                                  # draw 2 action
+                    if self.draw_pile.is_empty():
+                        self.replenish_draw_pile()
+                    self.draw_card(next_player,playing = False)
+                    self.play_skip()
+                self.discard_pile.push(played_card)
+            else:   
                 self.discard_pile.push(played_card)
 
 
