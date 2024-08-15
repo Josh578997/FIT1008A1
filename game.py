@@ -311,19 +311,7 @@ class Game:
                     self.discard_pile.push(new_card)
                     continue
             if hand_card_label == CardLabel.CRAZY:
-                try:
-                    self.crazy_play(played_card)
-                except Exception("Stack is empty"):
-                    top_card = self.discard_pile.pop()
-                    temp_array = ArrayR(len(self.discard_pile))
-
-                    for i in range(len(self.discard_pile)):
-                        temp_array[i] = self.discard_pile.pop()
-                    RandomGen.random_shuffle(temp_array)
-
-                for i in range(len(temp_array)):
-                    self.draw_pile.push(temp_array[i])
-    
+                self.crazy_play(played_card)
                 self.play_skip()
                 self.discard_pile.push(played_card)
             elif hand_card_label == CardLabel.DRAW_FOUR:
@@ -332,17 +320,9 @@ class Game:
             elif hand_card_color == self.current_color or hand_card_label == self.current_label:
                 if played_card.label == CardLabel.DRAW_TWO:
                     next_player = self.next_player()
-                    try:
-                        for _ in range (2):                                  # draw 2 action
-                            self.draw_card(next_player,playing = False)
-                            self.play_skip()
-                    except Exception("Stack is empty"):
-                        top_card = self.discard_pile.pop()
-                        temp_array = ArrayR(len(self.discard_pile))
-
-                        for i in range(len(self.discard_pile)):
-                            temp_array[i] = self.discard_pile.pop()
-                        RandomGen.random_shuffle(temp_array)
+                    for _ in range (2):                                  # draw 2 action
+                        self.draw_card(next_player,playing = False)
+                        self.play_skip()
                 
                 self.discard_pile.push(played_card)
 
