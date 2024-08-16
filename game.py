@@ -148,6 +148,7 @@ class Game:
             Worst Case Complexity:
         """
         self.current_color = CardColor(RandomGen.randint(0,3))
+        self.current_label = None
         if card.label == CardLabel.DRAW_FOUR:
             next_player = self.next_player()
             for _ in range(4):
@@ -339,14 +340,10 @@ class Game:
             elif hand_card_label == CardLabel.CRAZY:
                 self.crazy_play(played_card)
                 self.play_skip()
-                self.current_color = played_card.color
-                self.current_label = played_card.label
                 self.discard_pile.push(played_card)
             elif hand_card_label == CardLabel.DRAW_FOUR:
                 self.crazy_play(played_card)
                 self.play_skip()
-                self.current_color = played_card.color
-                self.current_label = played_card.label
                 self.discard_pile.push(played_card)
             elif played_card.label == CardLabel.DRAW_TWO:
                 next_player = self.next_player()
@@ -362,7 +359,7 @@ class Game:
                 self.current_color = played_card.color
                 self.current_label = played_card.label
                 self.discard_pile.push(played_card)
-            
+          
 
 
 
