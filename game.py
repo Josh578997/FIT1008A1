@@ -284,7 +284,10 @@ class Game:
 
         for i in range(len(temp_array)):
             self.draw_pile.push(temp_array[i])
-        self.discard_pile.push(top_card)      
+        self.current_color = top_card.color
+        self.current_label = top_card.label
+        self.discard_pile.push(top_card)
+             
 
     def play_game(self) -> Player:
         """
@@ -321,20 +324,29 @@ class Game:
                 try:
                     new_card = self.draw_card(self.current_player, playing = True) 
                     if new_card:
+                        self.current_color = new_card.color
+                        self.current_label = new_card.label
                         self.discard_pile.push(new_card)
+
                 except:
                     self.replenish_draw_pile()
                     new_card = self.draw_card(self.current_player, playing = True)
                     if new_card:
+                        self.current_color = new_card.color
+                        self.current_label = new_card.label
                         self.discard_pile.push(new_card)
                 continue
             elif hand_card_label == CardLabel.CRAZY:
                 self.crazy_play(played_card)
                 self.play_skip()
+                self.current_color = played_card.color
+                self.current_label = played_card.label
                 self.discard_pile.push(played_card)
             elif hand_card_label == CardLabel.DRAW_FOUR:
                 self.crazy_play(played_card)
                 self.play_skip()
+                self.current_color = played_card.color
+                self.current_label = played_card.label
                 self.discard_pile.push(played_card)
             elif played_card.label == CardLabel.DRAW_TWO:
                 next_player = self.next_player()
@@ -343,10 +355,14 @@ class Game:
                         self.replenish_draw_pile()
                     self.draw_card(next_player,playing = False)
                     self.play_skip()
+                self.current_color = played_card.color
+                self.current_label = played_card.label
                 self.discard_pile.push(played_card)
             else:   
+                self.current_color = played_card.color
+                self.current_label = played_card.label
                 self.discard_pile.push(played_card)
-
+            
 
 
 
