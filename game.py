@@ -329,7 +329,7 @@ class Game:
                         self.current_label = new_card.label
                         self.discard_pile.push(new_card)
 
-                except:
+                except Exception:
                     self.replenish_draw_pile()
                     new_card = self.draw_card(self.current_player, playing = True)
                     if not new_card:
