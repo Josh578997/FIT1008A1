@@ -258,9 +258,10 @@ class Game:
             elif (self.skip is True) and (self.reversed is False):
                 self.skip = False
                 if self.current_player.position + 2 > len(self.players)-1:
-                    if self.current_player.position + 1 >= len(self.players) -1:
+                    if self.current_player.position + 1 == len(self.players) -1:
+                        return self.players[0]
+                    else:
                         return self.players[1]
-                    return self.players[0]
                 else:
                     return self.players[self.current_player.position+2]        
             elif (self.skip is False) and (self.reversed is False):
