@@ -304,14 +304,12 @@ class Game:
             Player: The winner of the game
 
         Complexity:
-            Best Case Complexity:
+            Best Case Complexity:  
             Worst Case Complexity:
         """
         game = True
         while game:
             self.current_player = self.next_player() # get the next player and set as current
-
-
 
             new_card_label = None
             new_card_color = None
