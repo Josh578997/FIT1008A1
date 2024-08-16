@@ -285,8 +285,6 @@ class Game:
 
         for i in range(len(temp_array)):
             self.draw_pile.push(temp_array[i])
-        self.current_color = top_card.color
-        self.current_label = top_card.label
         self.discard_pile.push(top_card)
              
 
@@ -311,51 +309,49 @@ class Game:
             if len(self.current_player.hand) == 0:
                 return self.current_player            # win condition
 
-            hand_card_label = None
-            hand_card_color = None
+            new_card_label = None
+            new_card_color = None
 
             for i in range(len(self.current_player.hand)):
                 if self.current_player.hand[i].color == self.current_color or self.current_player.hand[i].label == self.current_label or self.current_player.hand[i].label == CardLabel.CRAZY or self.current_player.hand[i].label == CardLabel.DRAW_FOUR:
-                    hand_card = self.current_player.hand[i]   # card to be played
-                    hand_card_color = hand_card.color
-                    hand_card_label = hand_card.label
-                    played_card = self.current_player.play_card(i)
+                    new_card = self.current_player.hand[i]   # card to be played
+                    new_card_color = new_card.color
+                    new_card_label = new_card.label
+                    self.current_player.play_card(i)
                     break
-            if hand_card_color == None and hand_card_label == None:
+            if new_card_color == None and new_card_label == None:
                 try:
                     new_card = self.draw_card(self.current_player, playing = True) 
-                    if new_card:
-                        self.current_color = new_card.color
-                        self.current_label = new_card.label
-                        played_card = new_card
-                        self.discard_pile.push(new_card)
+
                 except Exception:
                     self.replenish_draw_pile()
                     new_card = self.draw_card(self.current_player, playing = True)
-                    if not new_card:
-                        continue
-            elif played_card.label == CardLabel.CRAZY:
-                self.crazy_play(played_card)
+                if new_card:
+                    new_card_color = new_card.color
+                    new_card_label = new_card.label
+
+            if new_card_label == CardLabel.CRAZY:
+                self.crazy_play(new_card)
                 self.play_skip()
-                self.discard_pile.push(played_card)
-            elif played_card.label == CardLabel.DRAW_FOUR:
-                self.crazy_play(played_card)
+                self.discard_pile.push(new_card)
+            elif new_card_label == CardLabel.DRAW_FOUR:
+                self.crazy_play(new_card)
                 self.play_skip()
-                self.discard_pile.push(played_card)
-            elif played_card.label == CardLabel.DRAW_TWO:
+                self.discard_pile.push(new_card)
+            elif new_card_label == CardLabel.DRAW_TWO:
                 next_player = self.next_player()
                 for _ in range (2):                                  # draw 2 action
                     if self.draw_pile.is_empty():
                         self.replenish_draw_pile()
                     self.draw_card(next_player,playing = False)
                     self.play_skip()
-                self.current_color = played_card.color
-                self.current_label = played_card.label
-                self.discard_pile.push(played_card)
+                self.current_color = new_card.color
+                self.current_label = new_card.label
+                self.discard_pile.push(new_card)
             else:   
-                self.current_color = played_card.color
-                self.current_label = played_card.label
-                self.discard_pile.push(played_card)
+                self.current_color = new_card.color
+                self.current_label = new_card.label
+                self.discard_pile.push(new_card)
           
 
 
