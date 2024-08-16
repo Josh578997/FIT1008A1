@@ -348,7 +348,7 @@ class Game:
                 self.current_color = new_card.color
                 self.current_label = new_card.label
                 self.discard_pile.push(new_card)
-            else:   
+            elif new_card_color == self.current_color or new_card_label == self.current_label:   
                 self.current_color = new_card.color
                 self.current_label = new_card.label
                 self.discard_pile.push(new_card)
