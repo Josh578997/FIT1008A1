@@ -303,6 +303,7 @@ class Game:
         game = True
         while game:
             self.current_player = self.next_player() # get the next player and set as current
+
             if len(self.current_player.hand) == 0:
                 return self.current_player            # win condition
 
