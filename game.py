@@ -311,6 +311,7 @@ class Game:
 
             new_card_label = None
             new_card_color = None
+            new_card = None
 
             for i in range(len(self.current_player.hand)):
                 if self.current_player.hand[i].color == self.current_color or self.current_player.hand[i].label == self.current_label or self.current_player.hand[i].label == CardLabel.CRAZY or self.current_player.hand[i].label == CardLabel.DRAW_FOUR:
@@ -349,8 +350,6 @@ class Game:
                 self.current_label = new_card.label
                 self.discard_pile.push(new_card)
             elif new_card_color == self.current_color or new_card_label == self.current_label:   
-                self.current_color = new_card.color
-                self.current_label = new_card.label
                 self.discard_pile.push(new_card)
           
 
