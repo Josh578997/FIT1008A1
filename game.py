@@ -311,8 +311,7 @@ class Game:
         while game:
             self.current_player = self.next_player() # get the next player and set as current
 
-            if len(self.current_player.hand) == 0:
-                return self.current_player            # win condition
+
 
             new_card_label = None
             new_card_color = None
@@ -371,7 +370,8 @@ class Game:
                 self.current_color = new_card_color
                 self.current_label = new_card_label               
                 self.discard_pile.push(new_card)
-
+            if len(self.current_player.hand) == 0:
+                return self.current_player            # win condition
 
 
 
