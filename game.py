@@ -319,7 +319,8 @@ class Game:
             if hand_card_color == None and hand_card_label == None:
                 try:
                     new_card = self.draw_card(self.current_player, playing = True) 
-                    self.discard_pile.push(new_card)
+                    if new_card:
+                        self.discard_pile.push(new_card)
                 except:
                     self.replenish_draw_pile()
                     new_card = self.draw_card(self.current_player, playing = True)
