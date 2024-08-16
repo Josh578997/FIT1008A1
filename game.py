@@ -334,10 +334,14 @@ class Game:
             if new_card_label == CardLabel.CRAZY:
                 self.crazy_play(new_card)
                 self.play_skip()
+                self.current_color = new_card_color
+                self.current_label = new_card_label
                 self.discard_pile.push(new_card)
             elif new_card_label == CardLabel.DRAW_FOUR:
                 self.crazy_play(new_card)
                 self.play_skip()
+                self.current_color = new_card_color
+                self.current_label = new_card_label                
                 self.discard_pile.push(new_card)
             elif new_card_label == CardLabel.DRAW_TWO:
                 next_player = self.next_player()
@@ -350,8 +354,11 @@ class Game:
                 self.current_label = new_card.label
                 self.discard_pile.push(new_card)
             elif new_card_color == self.current_color or new_card_label == self.current_label:   
+                self.current_color = new_card_color
+                self.current_label = new_card_label               
                 self.discard_pile.push(new_card)
-          
+
+
 
 
 
