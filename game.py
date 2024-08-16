@@ -327,18 +327,18 @@ class Game:
                     if new_card:
                         self.current_color = new_card.color
                         self.current_label = new_card.label
+                        played_card = new_card
                         self.discard_pile.push(new_card)
-
                 except Exception:
                     self.replenish_draw_pile()
                     new_card = self.draw_card(self.current_player, playing = True)
                     if not new_card:
                         continue
-            elif hand_card_label == CardLabel.CRAZY:
+            elif played_card.label == CardLabel.CRAZY:
                 self.crazy_play(played_card)
                 self.play_skip()
                 self.discard_pile.push(played_card)
-            elif hand_card_label == CardLabel.DRAW_FOUR:
+            elif played_card.label == CardLabel.DRAW_FOUR:
                 self.crazy_play(played_card)
                 self.play_skip()
                 self.discard_pile.push(played_card)
