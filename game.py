@@ -352,6 +352,13 @@ class Game:
                 self.current_label = new_card.label
                 self.discard_pile.push(new_card)
                 continue
+            elif new_card_label == CardLabel.SKIP and new_card_color == self.current_color:
+                self.skip = True
+            elif new_card_label == CardLabel.REVERSE and new_card_color == self.current_color:
+                if self.reversed == False:
+                    self.reversed = True
+                else:
+                    self.reversed = False
             elif new_card_color == self.current_color or new_card_label == self.current_label:   
                 self.current_color = new_card_color
                 self.current_label = new_card_label               
