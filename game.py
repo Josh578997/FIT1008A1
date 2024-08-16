@@ -332,11 +332,8 @@ class Game:
                 except:
                     self.replenish_draw_pile()
                     new_card = self.draw_card(self.current_player, playing = True)
-                    if new_card:
-                        self.current_color = new_card.color
-                        self.current_label = new_card.label
-                        self.discard_pile.push(new_card)
-                continue
+                    if not new_card:
+                        continue
             elif hand_card_label == CardLabel.CRAZY:
                 self.crazy_play(played_card)
                 self.play_skip()
