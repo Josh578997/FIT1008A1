@@ -210,7 +210,8 @@ class Game:
         """
         card = self.draw_pile.pop()
         current_card = self.discard_pile.peek()
-        if (card.label == current_card.label) or (card.color == current_card.color) or (card.label in [CardLabel.CRAZY,CardLabel.DRAW_FOUR]) and playing == True:   
+        if (card.label == current_card.label or card.color == current_card.color or card.label in [CardLabel.CRAZY,CardLabel.DRAW_FOUR]) \
+            and playing == True:   
             return card
         else:
             player.add_card(card)
