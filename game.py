@@ -6,7 +6,6 @@ from constants import Constants
 from data_structures.aset import ASet as set
 from data_structures.array_sorted_list import ArraySortedList
 from data_structures.stack_adt import ArrayStack
-import typing
 
 class Game:
     """
@@ -209,7 +208,7 @@ class Game:
             Worst Case Complexity: O(1)
         """
         card = self.draw_pile.pop()
-        current_card = self.discard_pile.peek()
+        current_card = self.discard_pile.peek() # get top card in the discard pile
         if (card.label == current_card.label or card.color == current_card.color or card.label in [CardLabel.CRAZY,CardLabel.DRAW_FOUR]) \
             and playing == True:   
             return card
@@ -232,45 +231,45 @@ class Game:
             Best Case Complexity: O(1)
             Worst Case Complexity: O(1)
         """
-        if self.current_player is None:
-            if (self.skip is False) and (self.reversed is True):
-                return self.players[len(self.players)-1]
-            elif (self.skip is True) and (self.reversed is True):
-                self.skip = False
-                return self.players[len(self.players)-2]
-            elif (self.skip is True) and (self.reversed is False):
-                self.skip = False
-                return self.players[1]
+        if self.current_player is None: #O(1)
+            if (self.skip is False) and (self.reversed is True):  #O(1)
+                return self.players[len(self.players)-1]         #O(1)
+            elif (self.skip is True) and (self.reversed is True): #O(1)
+                self.skip = False                                  #O(1)
+                return self.players[len(self.players)-2]            #O(1)
+            elif (self.skip is True) and (self.reversed is False):  #O(1)
+                self.skip = False                                   #O(1)
+                return self.players[1]                              #O(1)
             else:
-                return self.players[0]
+                return self.players[0]                             #O(1)
         else:    
-            if (self.skip is False) and (self.reversed is True):
-                if self.current_player.position - 1 < 0:
-                    return self.players[-1]
+            if (self.skip is False) and (self.reversed is True):  #O(1)
+                if self.current_player.position - 1 < 0:          #O(1)
+                    return self.players[-1]                     #O(1)
                 else:
-                    return self.players[self.current_player.position-1]
-            elif (self.skip is True) and (self.reversed is True):
+                    return self.players[self.current_player.position-1]  #O(1)
+            elif (self.skip is True) and (self.reversed is True):     #O(1)
+                self.skip = False                                    #O(1)
+                if self.current_player.position - 2 < 0:           #O(1)
+                    if self.current_player.position - 1 <= 0:        #O(1)
+                        return self.players[-2]                    #O(1)
+                    return self.players[-1]                        #O(1)
+                else:
+                    return self.players[self.current_player.position-2]  #O(1)
+            elif (self.skip is True) and (self.reversed is False):        #O(1)
                 self.skip = False
-                if self.current_player.position - 2 < 0:
-                    if self.current_player.position - 1 <= 0:
-                        return self.players[-2]
-                    return self.players[-1]
+                if self.current_player.position + 2 > len(self.players)-1:  #O(1)
+                    if self.current_player.position + 1 == len(self.players) -1:   #O(1)
+                        return self.players[0]                           #O(1)
+                    else:  
+                        return self.players[1]                           #O(1)
                 else:
-                    return self.players[self.current_player.position-2]
-            elif (self.skip is True) and (self.reversed is False):
-                self.skip = False
-                if self.current_player.position + 2 > len(self.players)-1:
-                    if self.current_player.position + 1 == len(self.players) -1:
-                        return self.players[0]
-                    else:
-                        return self.players[1]
-                else:
-                    return self.players[self.current_player.position+2]        
+                    return self.players[self.current_player.position+2]  #O(1)        
             elif (self.skip is False) and (self.reversed is False):
-                if self.current_player.position == len(self.players)-1:
-                    return self.players[0]
-                else:
-                    return self.players[self.current_player.position+1]
+                if self.current_player.position == len(self.players)-1:   #O(1)
+                    return self.players[0]                                  #O(1)
+                else: 
+                    return self.players[self.current_player.position+1]      #O(1)
 
     def replenish_draw_pile(self) -> None:
         '''
