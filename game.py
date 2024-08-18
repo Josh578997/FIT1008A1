@@ -152,7 +152,7 @@ class Game:
         self.current_label = None  #O(1)
         if card.label == CardLabel.DRAW_FOUR: #O(1)
             next_player = self.next_player()   #O(1)
-            for _ in range(4):
+            for _ in range(5):
                 if self.draw_pile.is_empty():   #O(1)
                     self.replenish_draw_pile()   #O(n)
                 self.draw_card(next_player,playing=False) #O(1)
