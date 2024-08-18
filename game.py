@@ -6,6 +6,7 @@ from constants import Constants
 from data_structures.aset import ASet as set
 from data_structures.array_sorted_list import ArraySortedList
 from data_structures.stack_adt import ArrayStack
+import typing
 
 class Game:
     """
@@ -13,8 +14,8 @@ class Game:
     """
 
     #boolean variables determine special game states
-    reversed = False
-    skip = False
+    reversed: bool = False
+    skip: bool = False
 
     def __init__(self) -> None:
         """
@@ -27,15 +28,15 @@ class Game:
             None
 
         Complexity:
-            Best Case Complexity:
-            Worst Case Complexity:
+            Best Case Complexity:  O(1), where n (size of initalised array) is 1
+            Worst Case Complexity: O(n), n is the size of the initalised array
         """
-        self.players = ArraySortedList(Constants.MAX_PLAYERS)
-        self.draw_pile = ArrayStack(Constants.DECK_SIZE)
-        self.discard_pile = ArrayStack(Constants.DECK_SIZE)
-        self.current_player = None
-        self.current_color = None
-        self.current_label = None
+        self.players = ArraySortedList(Constants.MAX_PLAYERS) #O(n), n is array size
+        self.draw_pile = ArrayStack(Constants.DECK_SIZE)      #O(n), n is array size
+        self.discard_pile = ArrayStack(Constants.DECK_SIZE)     
+        self.current_player = None                          #O(1)
+        self.current_color = None                           #O(1)
+        self.current_label = None                           #O(1)
         
         
 
@@ -98,37 +99,37 @@ class Game:
             None
 
         Complexity:
-            Best Case Complexity:
-            Worst Case Complexity:
+            Best Case Complexity: O(1), when N (number of crads) is 1 and n (number of players) is 1
+            Worst Case Complexity: O(n+N), N is number of cards, n is number of players
         """
-        for player in players:
+        for player in players:    #O(n)
             self.players.add(player)
-        self.cards = self.generate_cards()
+        self.cards: ArrayR[Card] = self.generate_cards()  #O(N)
         i = 0
-        for card in self.cards:
-            self.player_dealt = self.players[i]
-            if len(self.player_dealt.hand) == Constants.NUM_CARDS_AT_INIT:
-                self.draw_pile.push(card) #push card to the draw pile
-            elif len(self.player_dealt.hand) < Constants.NUM_CARDS_AT_INIT:
-                self.player_dealt.add_card(card)
+        for card in self.cards:    #O(N)
+            self.player_dealt = self.players[i]   #O(1)
+            if len(self.player_dealt.hand) == Constants.NUM_CARDS_AT_INIT: #O(1)
+                self.draw_pile.push(card) #push card to the draw pile #O(1)
+            elif len(self.player_dealt.hand) < Constants.NUM_CARDS_AT_INIT: #O(1)
+                self.player_dealt.add_card(card)   #O(1)
             else:
                 print("weird exeption please check code")
                 exit()
-            if i < len(self.players)-1:
-                i+=1
+            if i < len(self.players)-1: #O(1)
+                i+=1   #O(1)
             else:
-                i = 0
-        self.discard_pile.push(self.draw_pile.pop())
-        checkcard = self.discard_pile.peek()
-        currentcardlabel = checkcard.label
+                i = 0  #O(1)
+        self.discard_pile.push(self.draw_pile.pop()) #O(1)
+        checkcard = self.discard_pile.peek()  #O(1)
+        currentcardlabel = checkcard.label    #O(1)
 
-        while currentcardlabel not in [0,1,2,3,4,5,6,7,8,9]:
-            self.discard_pile.push(self.draw_pile.pop())
-            checkcard = self.discard_pile.peek()
+        while currentcardlabel not in [0,1,2,3,4,5,6,7,8,9]: #O(n)
+            self.discard_pile.push(self.draw_pile.pop()) #O(1)
+            checkcard = self.discard_pile.peek() #O(1)
         
-        finalcard = self.discard_pile.peek()
-        self.current_color = finalcard.color
-        self.current_label = finalcard.label
+        finalcard = self.discard_pile.peek()  #O(1)
+        self.current_color = finalcard.color  #O(1)
+        self.current_label = finalcard.label   #O(1)
         
         
 
@@ -144,17 +145,17 @@ class Game:
             None
 
         Complexity:
-            Best Case Complexity:
-            Worst Case Complexity:
+            Best Case Complexity: O(1), when the deck doesn't need to be replenished.
+            Worst Case Complexity: O(n), where n is the number of cards in the deck (due to replenish_draw_pile() being called)
         """
-        self.current_color = CardColor(RandomGen.randint(0,3))
-        self.current_label = None
-        if card.label == CardLabel.DRAW_FOUR:
-            next_player = self.next_player()
+        self.current_color: int = CardColor(RandomGen.randint(0,3)) #O(1)
+        self.current_label = None  #O(1)
+        if card.label == CardLabel.DRAW_FOUR: #O(1)
+            next_player = self.next_player()   #O(1)
             for _ in range(4):
-                if self.draw_pile.is_empty():
-                    self.replenish_draw_pile()
-                self.draw_card(next_player,playing=False)
+                if self.draw_pile.is_empty():   #O(1)
+                    self.replenish_draw_pile()   #O(n)
+                self.draw_card(next_player,playing=False) #O(1)
     
 
     def play_reverse(self) -> None:
@@ -168,8 +169,8 @@ class Game:
             None
 
         Complexity:
-            Best Case Complexity:
-            Worst Case Complexity:
+            Best Case Complexity: O(1)
+            Worst Case Complexity: O(1)
         """
         if self.reversed == False:
             self.reversed = True
@@ -187,8 +188,8 @@ class Game:
             None
 
         Complexity:
-            Best Case Complexity:
-            Worst Case Complexity:
+            Best Case Complexity: O(1)
+            Worst Case Complexity: O(1)
         """
         self.skip = True
 
@@ -204,12 +205,13 @@ class Game:
             Card - When drawing a playable card, other return None
 
         Complexity:
-            Best Case Complexity:
-            Worst Case Complexity:
+            Best Case Complexity: O(1)
+            Worst Case Complexity: O(1)
         """
         card = self.draw_pile.pop()
         current_card = self.discard_pile.peek()
-        if (card.label == current_card.label or card.color == current_card.color or card.label in [CardLabel.CRAZY,CardLabel.DRAW_FOUR]) and playing == True:
+        if (card.label == current_card.label) or (card.color == current_card.color) \
+            or (card.label in [CardLabel.CRAZY,CardLabel.DRAW_FOUR]) and playing == True:   
             return card
         else:
             player.add_card(card)
@@ -227,8 +229,8 @@ class Game:
             Player: The next player
 
         Complexity:
-            Best Case Complexity:
-            Worst Case Complexity:
+            Best Case Complexity: O(1)
+            Worst Case Complexity: O(1)
         """
         if self.current_player is None:
             if (self.skip is False) and (self.reversed is True):
@@ -271,26 +273,27 @@ class Game:
                     return self.players[self.current_player.position+1]
 
     def replenish_draw_pile(self) -> None:
-        '''Method to replenish the draw pile, called when the draw pile is empty
+        '''
+        Method to replenish the draw pile, called when the draw pile is empty
         Args:
             None
         Returns:
             None
-        Best Case Complexity:
+        Best Case Complexity: O(1), when there is one card in the discard pile
 
-        Worst Case Complexity:
+        Worst Case Complexity:  O(n), where there are n cards in the dicard pile
         
         '''
-        top_card = self.discard_pile.pop()
-        temp_array = ArrayR(len(self.discard_pile))
+        top_card = self.discard_pile.pop()  #O(1)
+        temp_array = ArrayR(len(self.discard_pile))  #O(n), n is length of discard pile
 
-        for i in range(len(self.discard_pile)):
+        for i in range(len(self.discard_pile)):      #O(n)
             temp_array[i] = self.discard_pile.pop()
-        RandomGen.random_shuffle(temp_array)
+        RandomGen.random_shuffle(temp_array)        #O(1)
 
-        for i in range(len(temp_array)):
+        for i in range(len(temp_array)):          #O(n)
             self.draw_pile.push(temp_array[i])
-        self.discard_pile.push(top_card)
+        self.discard_pile.push(top_card)        #O(1)
              
 
     def play_game(self) -> Player:
@@ -304,16 +307,16 @@ class Game:
             Player: The winner of the game
 
         Complexity:
-            Best Case Complexity:  
-            Worst Case Complexity:
+            Best Case Complexity:  N/A       <-- Complexity not required for this method
+            Worst Case Complexity: N/A
         """
         game = True
         while game:
             self.current_player = self.next_player() # get the next player and set as current
 
-            new_card_label = None
-            new_card_color = None
-            new_card = None
+            new_card_label: int = None
+            new_card_color: int = None
+            new_card: Card = None
 
             for i in range(len(self.current_player.hand)):
                 if self.current_player.hand[i].color == self.current_color or self.current_player.hand[i].label == self.current_label or self.current_player.hand[i].label == CardLabel.CRAZY or self.current_player.hand[i].label == CardLabel.DRAW_FOUR:

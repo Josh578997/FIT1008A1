@@ -46,19 +46,39 @@ class Card:
             None
 
         Complexity:
-            Best Case Complexity:
-            Worst Case Complexity:
+            Best Case Complexity: O(1)
+            Worst Case Complexity: O(1)
         """
         self.color = color
         self.label = label
 
     def __lt__(self,other):
-        if self.color == other.color:
+        """
+        Magic method to redefine less than to compare card color and label elements
+
+        Args:
+            self: self card object
+            other: other card object
+        Complexity:
+            Best Case Complexity: O(1)
+            Worst Case Complexity: O(1)
+        """
+        if self.color == other.color: 
             return self.label < other.label
         else:
             return self.color < other.color
         
     def __le__(self,other):
+        """
+        Magic method to redefine less than/equal to to compare card color and label elements
+
+        Args:
+            self: self card object
+            other: other card object
+        Complexity:
+            Best Case Complexity: O(1)
+            Worst Case Complexity: O(1)
+        """
         if self.color == other.color:
             return self.label <= other.label
         else:

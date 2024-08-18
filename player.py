@@ -91,9 +91,42 @@ class Player:
         """
         return self.hand[index]
     def __lt__(self,other):
+        """
+        Magic method for less than that uses the position as the 
+        comparison element
+
+        Args:
+            self: self player object
+            other: other player object
+        Complexity
+            Best Case Complexity: O(1)
+            Wose Case Complexity: O(1)
+        """
         return self.position < other.position
     def __gt__(self,other):
+        """
+        Magic method for greater than that uses the position as the 
+        comparison element
+
+        Args:
+            self: self player object
+            other: other player object
+        Complexity
+            Best Case Complexity: O(1)
+            Wose Case Complexity: O(1)
+        """
         return self.position > other.position
     def __le__(self,other):
+        """
+        Magic method for less than/equal to that uses the position as the 
+        comparison element
+
+        Args:
+            self: self player object
+            other: other player object
+        Complexity
+            Best Case Complexity: O(1)
+            Wose Case Complexity: O(1)
+        """
         return self.position <= other.position
 
