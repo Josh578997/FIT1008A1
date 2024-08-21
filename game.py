@@ -122,7 +122,9 @@ class Game:
         checkcard = self.discard_pile.peek()  #O(1)
         currentcardlabel = checkcard.label    #O(1)
 
-        while currentcardlabel not in [0,1,2,3,4,5,6,7,8,9]: #O(n)
+        while currentcardlabel not in [CardLabel.ZERO,CardLabel.ONE,CardLabel.TWO,CardLabel.THREE\
+                                       ,CardLabel.FOUR,CardLabel.FIVE,CardLabel.SIX,CardLabel.SEVEN\
+                                        ,CardLabel.EIGHT,CardLabel.NINE]: #O(n)
             self.discard_pile.push(self.draw_pile.pop()) #O(1)
             checkcard = self.discard_pile.peek() #O(1)
         
