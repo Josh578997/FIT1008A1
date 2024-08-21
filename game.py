@@ -107,10 +107,10 @@ class Game:
         i = 0
         for card in self.cards:    #O(N)
             self.player_dealt = self.players[i]   #O(1)
-            if len(self.player_dealt.hand) == Constants.NUM_CARDS_AT_INIT: #O(1)
-                self.draw_pile.push(card) #push card to the draw pile #O(1)
-            elif len(self.player_dealt.hand) < Constants.NUM_CARDS_AT_INIT: #O(1)
+            if len(self.player_dealt.hand) < Constants.NUM_CARDS_AT_INIT: #O(1)
                 self.player_dealt.add_card(card)   #O(1)
+            elif len(self.player_dealt.hand) == Constants.NUM_CARDS_AT_INIT: #O(1)
+                self.draw_pile.push(card) #push card to the draw pile #O(1)
             else:
                 print("weird exeption please check code")
                 exit()
