@@ -228,8 +228,8 @@ class Game:
             Player: The next player
 
         Complexity:
-            Best Case Complexity: O(1)
-            Worst Case Complexity: O(1)
+            Best Case Complexity: O(m), m is list length
+            Worst Case Complexity: O(len(self)*m), m is complexity of getting item equal or (item_equal+item_less_than) depending on item position
         """
         if self.current_player is None: #O(1)
             if (self.skip is False) and (self.reversed is True):  #O(1)
@@ -239,15 +239,15 @@ class Game:
                 return self.players[len(self.players)-2]            #O(1)
             elif (self.skip is True) and (self.reversed is False):  #O(1)
                 self.skip = False                                   #O(1)
-                return self.players[1]                              #O(1)
+                return self.players[1]                              #O(m)
             else:
-                return self.players[0]                             #O(1)
+                return self.players[0]                             #O(m)
         else:    
             if (self.skip is False) and (self.reversed is True):  #O(1)
                 if self.current_player.position - 1 < 0:          #O(1)
                     return self.players[-1]                     #O(1)
                 else:
-                    return self.players[self.current_player.position-1]  #O(1)
+                    return self.players[self.current_player.position-1]  #O(m)
             elif (self.skip is True) and (self.reversed is True):     #O(1)
                 self.skip = False                                    #O(1)
                 if self.current_player.position - 2 < 0:           #O(1)
@@ -264,7 +264,7 @@ class Game:
                     else:  
                         return self.players[1]                           #O(1)
                 else:
-                    return self.players[self.current_player.position+2]  #O(1)        
+                    return self.players[self.current_player.position+2]  #O(m)        
             elif (self.skip is False) and (self.reversed is False):
                 if self.current_player.position == len(self.players)-1:   #O(1)
                     return self.players[0]                                  #O(1)

@@ -54,10 +54,10 @@ class Player:
 
         Complexity:
             Best Case Complexity: O(1)
-            Worst Case Complexity: O(1)
+            Worst Case Complexity: O(n), where n is the length of the hand
         """
         removed_card = self.hand[index] #O(1)
-        self.hand.delete_at_index(index) #O(1)
+        self.hand.delete_at_index(index) #O(1) best case O(n) worst case
         return removed_card
 
     def __len__(self) -> int:
